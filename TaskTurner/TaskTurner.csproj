@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Folder Include="Assets\Files\Data\"/>
+        <Folder Include="Assets\Files\Txt\"/>
+        <Folder Include="Assets\Images\"/>
+        <Folder Include="Services\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Page Update="Views\MainWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\Images\looking_glass_icon.png" />
+      <Resource Include="Assets\Images\looking_glass_icon.png" />
+      <None Remove="Assets\Images\list_icon.svg" />
+      <Resource Include="Assets\Images\list_icon.svg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.4-beta1" />
+    </ItemGroup>
+
+</Project>

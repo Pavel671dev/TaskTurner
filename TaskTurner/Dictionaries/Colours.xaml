@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="AccentDark" Color="#324EA8" />
+    <SolidColorBrush x:Key="AccentDarkOver" Color="#7489CF" />
+    <SolidColorBrush x:Key="AccentDarkClick" Color="#384E96" />
+    <SolidColorBrush x:Key="TaskListBackground" Color="FloralWhite" />
+    <SolidColorBrush x:Key="WindowBackground" Color="White" />
+    <SolidColorBrush x:Key="TaskStatusBackground" Color="FloralWhite" />
+    <SolidColorBrush x:Key="DefaultText" Color="DimGray" />
+    <SolidColorBrush x:Key="OnAccent" Color="White" />
+    <SolidColorBrush x:Key="PlaceholderText" Color="#FF5D5D5D"/>
+    
+    <SolidColorBrush x:Key="PlaceholderBorder" Color="#FF949494"/>
+    <SolidColorBrush x:Key="PlaceholderBorderText" Color="#262625"/>
+    
+    <SolidColorBrush x:Key="LowImportance" Color="ForestGreen" />
+    <SolidColorBrush x:Key="MediumImportance" Color="Yellow" />
+    <SolidColorBrush x:Key="HighImportance" Color="DarkRed" />
+
+    <SolidColorBrush x:Key="ButtonComplete" Color="Green"/>
+    <SolidColorBrush x:Key="ButtonCompleteOver" Color="SeaGreen"/>
+    <SolidColorBrush x:Key="ButtonCompleteClick" Color="ForestGreen"/>
+    <SolidColorBrush x:Key="ButtonEdit" Color="#403F3E"/>
+    <SolidColorBrush x:Key="ButtonEditOver" Color="#5E5C5C"/>
+    <SolidColorBrush x:Key="ButtonEditClick" Color="#343434"/>
+    <SolidColorBrush x:Key="ButtonDelete" Color="#B83B2A"/>
+    <SolidColorBrush x:Key="ButtonDeleteOver" Color="#B55548"/>
+    <SolidColorBrush x:Key="ButtonDeleteClick" Color="#BA3220"/>
+    
+    
+    <SolidColorBrush x:Key="Borders" Color="LightGray" />
+
+    
+    <SolidColorBrush x:Key="TaskProgressCompleted" Color="PaleGreen" />
+    <SolidColorBrush x:Key="TaskProgressNotStarted" Color="LightGray" />
+    <SolidColorBrush x:Key="TaskProgressLate" Color="IndianRed" />
+    <SolidColorBrush x:Key="TaskProgressInProgress" Color="LimeGreen" />
+    <SolidColorBrush x:Key="TaskProgressAchieved" Color="Green" />
+    <SolidColorBrush x:Key="TaskProgressDeleted" Color="Gray" />
+    
+    <SolidColorBrush x:Key="NavDefault" Color="Transparent"/>
+    <SolidColorBrush x:Key="NavOver" Color="#7489CF"/>
+    <SolidColorBrush x:Key="NavClick" Color="#384E96"/>
+    
+    <SolidColorBrush x:Key="TaskListDescriptionText" Color="#5E5C5C"/>
+    <SolidColorBrush x:Key="TaskListDescriptionTitle" Color="#FF707070"></SolidColorBrush>
+</ResourceDictionary>
