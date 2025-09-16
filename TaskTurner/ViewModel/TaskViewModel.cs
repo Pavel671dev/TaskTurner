@@ -20,6 +20,9 @@ public class TaskViewModel: INotifyPropertyChanged
     public TaskState TaskState { get; set; }
     public TaskCategory TaskCategory { get; set; }
     public TaskImportance TaskImportance { get; set; }
+
+    public ObservableCollection<TaskImportance> Importances { get; set; }
+
     
     public ObservableCollection<TaskChecklist> TaskCheckList { get; set; }
     
@@ -62,9 +65,28 @@ public class TaskViewModel: INotifyPropertyChanged
         };
         
         taskDataService.AddTask(newTask);
+        
+        ClearFields();
         LoadTasks();
     }
 
+    private void ClearFields()
+    {
+        Title = "";
+        Description = "";
+        DueDate = DateTime.Now;
+        TaskCheckList.Clear();
+        UpdateWindow();
+    }
+
+    private void UpdateWindow()
+    {
+        OnPropertyChanged(Title);
+        OnPropertyChanged(Description);
+        OnPropertyChanged(nameof(DueDate));
+        OnPropertyChanged(nameof(TaskCheckList));
+        OnPropertyChanged(nameof(Importances));
+    }
     public void UpdateTask(Task updateTask)
     {
         taskDataService.UpdateTask(updateTask);
@@ -76,12 +98,20 @@ public class TaskViewModel: INotifyPropertyChanged
         taskDataService.DeleteTasks(taskId);
         LoadTasks();
     }
-    
+
+    public ObservableCollection<TaskImportance> InitializeTaskImportance()
+    {
+        return new ObservableCollection<TaskImportance>(Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>());
+    }
     public event PropertyChangedEventHandler PropertyChanged;
 
     public TaskViewModel()
     {
         taskDataService = new TaskDataService();
+        TaskCheckList = new ObservableCollection<TaskChecklist>();
+        DueDate = DateTime.Now;
+        // Resource for Combobox
+        Importances = InitializeTaskImportance();
     }
 
     protected virtual void OnPropertyChanged(string propertyName)

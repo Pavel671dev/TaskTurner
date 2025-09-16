@@ -1,11 +1,41 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using TaskTurner.Views;
+using TaskTurner.DataServices;
+using TaskTurner.Models;
+using Task = TaskTurner.Models.Task;
 
 namespace TaskTurner.ViewModel;
 
 public class MainWindowViewModel : INotifyPropertyChanged
 {
+    private readonly TaskDataService taskDataService;
+    
+    private ObservableCollection<Task> tasks;
+
+    public ObservableCollection<Task> Tasks
+    {
+        get => tasks;
+        set
+        {
+            tasks = value;
+            OnPropertyChanged(nameof(Tasks));
+        }
+    }
+    
+    private void LoadTasks()
+    {
+        var TaskList = taskDataService.LoadTasks();
+        Tasks = new ObservableCollection<Task>(TaskList);
+    }
+    public MainWindowViewModel()
+    {
+        taskDataService = new TaskDataService();
+        LoadTasks();
+    }
+    
     public event PropertyChangedEventHandler PropertyChanged;
 
     public ICommand IOpenNewWindowCommand => new RelayCommand(OpenNewWindow);

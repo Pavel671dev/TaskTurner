@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using TaskTurner.ViewModel;
 
 namespace TaskTurner;
@@ -11,7 +12,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-
-        this.DataContext = new TaskViewModel();
+        DataContext = new MainWindowViewModel();
     }
+    
+    
 }

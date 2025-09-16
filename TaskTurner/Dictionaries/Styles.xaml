@@ -94,6 +94,14 @@
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
     
+    <!--Task in List-->
+    <Style x:Key="TaskInList" TargetType="TextBlock">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource DefaultText}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    
     <!--ActionButtonsFont-->
     <Style x:Key="ActionButtons" TargetType="TextBlock">
         <Setter Property="Background" Value="Transparent"/>

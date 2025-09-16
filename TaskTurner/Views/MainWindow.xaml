@@ -41,13 +41,7 @@
         <!--Navigation Panel-->
         <Rectangle Fill="{StaticResource AccentDark}" />
         <StackPanel Margin="10 15 10 10">
-            <Button Style="{StaticResource TaskManagerNavigationButton}">
-                <Viewbox Width="30"
-                         Height="30">
-                    <Path Data="{StaticResource NavIcon}" Fill="White"/>
-                </Viewbox>
-            </Button>
-            
+            <!--Done tasks-->
             <Button Style="{StaticResource TaskManagerNavigationButton}">
                 <Viewbox Width="30"
                          Height="30">
@@ -55,6 +49,16 @@
                 </Viewbox>
             </Button>
             
+            <!--Idk what this button should do-->
+            <Button Style="{StaticResource TaskManagerNavigationButton}"
+                    Opacity="0">
+                <Viewbox Width="30"
+                         Height="30">
+                    <Path Data="{StaticResource NavIcon}" Fill="White"/>
+                </Viewbox>
+            </Button>
+            
+            <!--Deadline tasks-->
             <Button Style="{StaticResource TaskManagerNavigationButton}">
                 <Viewbox Width="35"
                          Height="35">
@@ -128,9 +132,23 @@
                 </Viewbox>
             </Button>
             
-            <ListView Grid.Row="2"
-                      Background="Transparent"
+            <ListView Grid.Row="2" ItemsSource = "{Binding Tasks}"
                       Margin="0 20">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width = "340"/>
+                                <ColumnDefinition Width = "1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
+                                       Style = "{StaticResource TaskInList}"/>
+                            <TextBlock Grid.Column="1" Text = "{Binding DueDate, StringFormat=yyyy.MM.dd,
+                            UpdateSourceTrigger=PropertyChanged}"
+                                       Style = "{StaticResource TaskInList}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Grid>
         
@@ -178,9 +196,10 @@
                     </TextBlock>
                 </ScrollViewer>
                 
-                <TextBlock Text="Due: 17/23/2023"
+                <TextBlock Text="Due: "
                            Background="{StaticResource AccentDark}"
                            VerticalAlignment="Center"
+                           Width = "150"
                            HorizontalAlignment="Left"
                            Grid.Row="2"
                            Foreground="White"

@@ -32,7 +32,7 @@
                        HorizontalAlignment="Center"></TextBlock>
         </Border>
         <!--Description-->
-        <TextBlock Text="Lower text lower text lower text"
+        <TextBlock Text="Placeholder text"
                    TextWrapping="Wrap"
                    Grid.Row="1"
                    Margin="20 5 0 0"

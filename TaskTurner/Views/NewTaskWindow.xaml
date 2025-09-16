@@ -15,8 +15,6 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         
         <!--Title-->
@@ -36,9 +34,13 @@
                    VerticalAlignment="Center"
                    Margin="15 10 0 0"
                    Foreground="{StaticResource Borders}"
-                   Visibility="{Binding Text.IsEmpty, ElementName=TitleBox, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            <ComboBox Grid.Column="1"
-                      Margin="10 10 10 0"></ComboBox>
+                   Visibility="{Binding Text.IsEmpty, ElementName=TitleBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   />
+            <ComboBox ItemsSource="{Binding Importances}"
+                      SelectedIndex="{Binding TaskImportance}"
+                      Grid.Column="1"
+                      Margin="10 10 10 0">
+            </ComboBox>
         </Grid>
         
         <!--Description-->
@@ -109,43 +111,17 @@
                 <TextBlock Text="Due: " Margin="5 0 0 0"
                            VerticalAlignment="Center"/>
                 <DatePicker Margin="5 0 0 0" SelectedDate="{Binding DueDate, UpdateSourceTrigger=PropertyChanged}"/>
-                <ComboBox SelectedIndex="0" MinWidth="60"
-                          Margin = "20 0 0 0"/>
-                <TextBlock Text=":" Margin="8 0 0 0"/>
-                <ComboBox SelectedIndex="0" MinWidth="60"
-                          Margin = "10 0 0 0"/>
             </StackPanel>
         </StackPanel>
         
-        <StackPanel Grid.Row="5">
-            <StackPanel Orientation="Horizontal"
-                        Margin="0 0 0 0"
-                        VerticalAlignment="Bottom"
-                        HorizontalAlignment="Left">
-                <CheckBox Margin="8 10 0 0"/>
-                <TextBlock Text="Include Timer"
-                           Margin = "10 10 0 0"/>
-            </StackPanel>
-        </StackPanel>
-        
-        <StackPanel Grid.Row="6">
-            <StackPanel Orientation="Horizontal"
-                        Margin="0 0 0 0"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Left">
-                <CheckBox Margin="8 0 0 0"/>
-                <TextBlock Text="Add task to your calendar"
-                           Margin = "10 0 0 0"/>
-            </StackPanel>
-        </StackPanel>
-        
-        <Button Grid.Row="7"
+        <Button Grid.Row="5"
                 Style="{StaticResource NewTaskAddButton}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
                 Width="70"
                 Height="20"
-                Margin = "0 0 10 10">
+                Margin = "0 0 10 10"
+                Command="{Binding IAddNewTask}">
                 <TextBlock  Margin = "5 0 0 0"
                         Height="20"
                         FontSize="9"
