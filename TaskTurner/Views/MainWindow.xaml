@@ -132,8 +132,10 @@
                 </Viewbox>
             </Button>
             
-            <ListView Grid.Row="2" ItemsSource = "{Binding Tasks}"
-                      Margin="0 20">
+            <ListView x:Name = "TaskListView"
+                Grid.Row="2" ItemsSource = "{Binding Tasks}"
+                      Margin="0 20"
+                      SelectionChanged="Selector_OnSelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -167,7 +169,7 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 
-                <TextBlock Text="Task Title"
+                <TextBlock x:Name = "TaskTitle"
                            Style="{StaticResource Title}"
                            Height="24"
                            FontSize="20"
@@ -187,7 +189,7 @@
                 <ScrollViewer Grid.Row="1"
                               VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Disabled">
-                    <TextBlock Text="This is a short description test"
+                    <TextBlock x:Name="TaskDescription"
                                TextWrapping="Wrap"
                                Grid.Row="1"
                                FontSize="16"
@@ -196,7 +198,7 @@
                     </TextBlock>
                 </ScrollViewer>
                 
-                <TextBlock Text="Due: "
+                <TextBlock x:Name = "TaskDueDate"
                            Background="{StaticResource AccentDark}"
                            VerticalAlignment="Center"
                            Width = "150"

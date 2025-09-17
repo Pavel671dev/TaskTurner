@@ -12,8 +12,8 @@ namespace TaskTurner.ViewModel;
 public class MainWindowViewModel : INotifyPropertyChanged
 {
     private readonly TaskDataService taskDataService;
-    
-    private ObservableCollection<Task> tasks;
+
+    private ObservableCollection<Task> tasks { get; set; }
 
     public ObservableCollection<Task> Tasks
     {
@@ -39,6 +39,13 @@ public class MainWindowViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
 
     public ICommand IOpenNewWindowCommand => new RelayCommand(OpenNewWindow);
+
+    public ICommand IDeleteTaskCommand => new RelayCommand(DeleteTaskAction);
+
+    private void DeleteTaskAction()
+    {
+        throw new NotImplementedException();
+    }
 
     private void OpenNewWindow()
     {

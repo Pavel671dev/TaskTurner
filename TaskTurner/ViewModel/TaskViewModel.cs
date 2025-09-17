@@ -48,8 +48,17 @@ public class TaskViewModel: INotifyPropertyChanged
         Tasks = new ObservableCollection<Task>(TaskList);
     }
 
+
+    private bool IsAddable(string title)
+    {
+        return Char.IsLetter(title[0]);
+    }
     public void AddNewTask()
     {
+        if (!IsAddable(Title))
+        {
+            return;
+        }
         Task newTask = new Task()
         {
             Title = this.Title,
@@ -59,9 +68,8 @@ public class TaskViewModel: INotifyPropertyChanged
             IsCompleted = false,
             StartDate = DateTime.Now,
             TaskCheckList = this.TaskCheckList,
-            TaskImportance = TaskImportance.Low,
+            TaskImportance = this.TaskImportance,
             TaskState = TaskState.Late,
-            Timer = new TimeSpan(),
         };
         
         taskDataService.AddTask(newTask);
