@@ -44,7 +44,8 @@ public class TaskDataService
         //Read tasks from JSON
         List<Task> tasks = new List<Task>();
         string fileContent = File.ReadAllText(filePath);
-        return JsonConvert.DeserializeObject<List<Task>>(fileContent);
+        tasks = JsonConvert.DeserializeObject<List<Task>>(fileContent);
+        return tasks;
     }
 
     public void SaveTasks(List<Task> tasks)

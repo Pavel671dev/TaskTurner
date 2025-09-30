@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using TaskTurner.Views;
 using TaskTurner.DataServices;
@@ -14,6 +16,10 @@ public class MainWindowViewModel : INotifyPropertyChanged
     private readonly TaskDataService taskDataService;
 
     private ObservableCollection<Task> tasks { get; set; }
+    
+    public Task SelectedTask { get; set; }
+    
+    public ObservableCollection<Subtask> subtasks { get; set; }
 
     public ObservableCollection<Task> Tasks
     {
@@ -24,33 +30,62 @@ public class MainWindowViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(Tasks));
         }
     }
-    
-    private void LoadTasks()
-    {
-        var TaskList = taskDataService.LoadTasks();
-        Tasks = new ObservableCollection<Task>(TaskList);
-    }
     public MainWindowViewModel()
     {
         taskDataService = new TaskDataService();
         LoadTasks();
     }
     
+    public void LoadTasks()
+    {
+        var TaskList = taskDataService.LoadTasks();
+        Tasks = new ObservableCollection<Task>(TaskList);
+    }
+    
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public ICommand IOpenNewWindowCommand => new RelayCommand(OpenNewWindow);
+    public ICommand IOpenNewWindowCommand => new RelayCommand(OpenTaskAddWindow);
 
-    public ICommand IDeleteTaskCommand => new RelayCommand(DeleteTaskAction);
+    public ICommand IDeleteTaskCommand => new RelayCommand(DeleteTask);
 
-    private void DeleteTaskAction()
+    public ICommand ICompleteTaskCommand => new RelayCommand(CompleteTask);
+
+    public ICommand IEditTaskCommand => new RelayCommand(EditTask);
+
+    private void DeleteTask()
     {
-        throw new NotImplementedException();
+        MessageBoxResult result = MessageBox.Show("Are you sure want to delete this task?",
+            "Warning", MessageBoxButton.YesNo);
+        if (result == MessageBoxResult.Yes)
+        {
+            taskDataService.DeleteTasks(SelectedTask.Id);
+            LoadTasks();
+            SelectedTask = null;
+        }
     }
 
-    private void OpenNewWindow()
+    private void CompleteTask()
+    {
+        Task completedTask = SelectedTask;
+        completedTask.IsCompleted = true;
+        taskDataService.UpdateTask(completedTask);
+        LoadTasks();
+        SelectedTask = null;
+    }
+    
+    private void OpenTaskAddWindow()
     {
         NewTaskWindow newTaskWindow = new NewTaskWindow();
+        newTaskWindow.Owner = Application.Current.MainWindow;
         newTaskWindow.Show();
+    }
+
+    private void EditTask()
+    {
+        EditWindow editWindow = new EditWindow(SelectedTask);
+        editWindow.EditedTask  = SelectedTask;
+        editWindow.Owner = Application.Current.MainWindow;
+        editWindow.Show();
     }
     
     protected virtual void OnPropertyChanged(string propertyName)

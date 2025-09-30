@@ -1,10 +1,11 @@
-﻿<Window x:Class="TaskTurner.Views.NewTaskWindow"
+﻿<Window x:Class="TaskTurner.Views.EditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TaskTurner.Views"
         xmlns:viewModel="clr-namespace:TaskTurner.ViewModel"
+        xmlns:global="clr-namespace:"
         mc:Ignorable="d"
         Title="NewTaskWindow" Height="480" Width="340"
         WindowStartupLocation="CenterScreen">
@@ -40,11 +41,6 @@
                    Foreground="{StaticResource Borders}"
                    Visibility="{Binding Text.IsEmpty, ElementName=TitleBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                    />
-            <ComboBox ItemsSource="{Binding Importances}"
-                      SelectedIndex="{Binding TaskImportance}"
-                      Grid.Column="1"
-                      Margin="10 10 10 0">
-            </ComboBox>
         </Grid>
         
         <!--Description-->
@@ -73,17 +69,17 @@
         <!--Subtask adding-->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="260"/>
-                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
             
             <TextBox  
                      Style="{StaticResource NewTaskWindowTextbox}"
-                     Margin="10 10 0 0 "
+                     Margin="10 10 20 0 "
                      Text = "{Binding Subtask, UpdateSourceTrigger=PropertyChanged}"/>
             
             <Button Grid.Column="1"
-                        Margin = "0 10 10 0"
+                        Margin = "0 10 45 0"
                         Style="{StaticResource SubtaskAddingButton}"
                         Command ="{Binding IAddNewSubtask}">
                         <Viewbox Width="20" Height="20"
@@ -91,20 +87,30 @@
                             <Path Data="{StaticResource NewTaskIcon}" Fill="{StaticResource OnAccent}" />
                         </Viewbox>
             </Button>
+            <Button Grid.Column="1"
+                    Margin = "30 10 0 0"
+                    Width="30"
+                    Height = "30"
+                    Style="{StaticResource TaskViewDeleteButton}"
+                    Command ="{Binding IDeleteSubtask}">
+                    <TextBlock Text="Del"/>
+            </Button>
         </Grid>
 
         <Border Grid.Row="3"
                 BorderThickness="1"
                 BorderBrush="LightGray"
                 Margin="10 10 10 10">
-                <ListView ItemsSource="{Binding TaskCheckList}">
+                <ListView x:Name="SubtaskView"
+                    ItemsSource="{Binding TaskCheckList}"
+                    SelectedItem="{Binding SelectedSubtask}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="DarkGray"
                                     BorderThickness="1">
                                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                                   HorizontalScrollBarVisibility="Disabled">
-                                        <TextBlock Text = "{Binding Description}"
+                                        <TextBox Text = "{Binding Description}"
                                                    FontSize="14"
                                                    Foreground="LightGray"
                                                    TextWrapping="Wrap"/>
@@ -122,7 +128,8 @@
                         HorizontalAlignment="Left">
                 <TextBlock Text="Due: " Margin="5 0 0 0"
                            VerticalAlignment="Center"/>
-                <DatePicker Margin="5 0 0 0" SelectedDate="{Binding DueDate, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker x:Name="Date"
+                    Margin="5 0 0 0" SelectedDate="{Binding DueDate, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </StackPanel>
         
@@ -133,7 +140,7 @@
                 Width="70"
                 Height="20"
                 Margin = "0 0 10 10"
-                Command="{Binding IAddNewTask}">
+                Command="{Binding IEditTask}">
                 <TextBlock  Margin = "5 0 0 0"
                         Height="20"
                         FontSize="9"
@@ -141,5 +148,5 @@
                         Text="Edit"
                         VerticalAlignment="Top"/>
         </Button>
-    </Grid>    
+    </Grid>
 </Window>

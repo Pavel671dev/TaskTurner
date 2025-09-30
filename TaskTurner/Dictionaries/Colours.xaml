@@ -38,6 +38,10 @@
     <SolidColorBrush x:Key="TaskProgressAchieved" Color="Green" />
     <SolidColorBrush x:Key="TaskProgressDeleted" Color="Gray" />
     
+    <SolidColorBrush x:Key="SubtaskAdd" Color="#FF272953"/>
+    <SolidColorBrush x:Key="SubtaskAddOver" Color="#FF403478"/>
+    <SolidColorBrush x:Key="SubtaskAddClick" Color="#FF523478"/>
+    
     <SolidColorBrush x:Key="NavDefault" Color="Transparent"/>
     <SolidColorBrush x:Key="NavOver" Color="#7489CF"/>
     <SolidColorBrush x:Key="NavClick" Color="#384E96"/>
