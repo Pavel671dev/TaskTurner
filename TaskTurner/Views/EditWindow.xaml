@@ -41,6 +41,15 @@
                    Foreground="{StaticResource Borders}"
                    Visibility="{Binding Text.IsEmpty, ElementName=TitleBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                    />
+            <TextBlock x:Name = "TaskId"
+                        Grid.Column="1" 
+                       Text = "{Binding Id, Mode=TwoWay}"
+                       Style = "{StaticResource Title}"
+                       Margin = "50 10 0 0"/>
+            <TextBlock Grid.Column="1"
+                       Style = "{StaticResource Title}"
+                       Text = "Id:"
+                       Margin="20 10 0 0"/>
         </Grid>
         
         <!--Description-->
@@ -102,7 +111,7 @@
                 BorderBrush="LightGray"
                 Margin="10 10 10 10">
                 <ListView x:Name="SubtaskView"
-                    ItemsSource="{Binding TaskCheckList}"
+                    ItemsSource="{Binding TaskCheckList, Mode=TwoWay}"
                     SelectedItem="{Binding SelectedSubtask}">
                     <ListView.ItemTemplate>
                         <DataTemplate>

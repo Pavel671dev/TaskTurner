@@ -54,6 +54,10 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     private void DeleteTask()
     {
+        if (!IsClickable())
+        {
+            return;
+        }
         MessageBoxResult result = MessageBox.Show("Are you sure want to delete this task?",
             "Warning", MessageBoxButton.YesNo);
         if (result == MessageBoxResult.Yes)
@@ -66,6 +70,10 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     private void CompleteTask()
     {
+        if (!IsClickable())
+        {
+            return;
+        }
         Task completedTask = SelectedTask;
         completedTask.IsCompleted = true;
         taskDataService.UpdateTask(completedTask);
@@ -82,10 +90,19 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     private void EditTask()
     {
+        if (!IsClickable())
+        {
+            return;
+        }
         EditWindow editWindow = new EditWindow(SelectedTask);
         editWindow.EditedTask  = SelectedTask;
         editWindow.Owner = Application.Current.MainWindow;
         editWindow.Show();
+    }
+
+    private bool IsClickable()
+    {
+        return SelectedTask != null;
     }
     
     protected virtual void OnPropertyChanged(string propertyName)

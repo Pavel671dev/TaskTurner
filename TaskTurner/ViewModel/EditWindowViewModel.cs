@@ -44,7 +44,6 @@ public class EditWindowViewModel: INotifyPropertyChanged
     public EditWindowViewModel()
     {
         taskDataService = new TaskDataService();
-        TaskCheckList = new ObservableCollection<Subtask>();
         // Resource for Combobox
         Importances = InitializeTaskImportance();
     }

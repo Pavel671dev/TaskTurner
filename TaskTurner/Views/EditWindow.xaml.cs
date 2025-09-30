@@ -18,7 +18,8 @@ public partial class EditWindow : Window
         EditWindowViewModel editWindowViewModel = new EditWindowViewModel();
         DataContext = editWindowViewModel;
         taskDataService = new TaskDataService();
-        
+
+        TaskId.Text = selectedTask.Id.ToString();
         EditedTask = selectedTask;
         TitleBox.Text =  EditedTask.Title;
         Description.Text = EditedTask.Description;
