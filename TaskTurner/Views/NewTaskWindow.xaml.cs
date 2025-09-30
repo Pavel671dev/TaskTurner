@@ -5,17 +5,18 @@ namespace TaskTurner.Views;
 
 public partial class NewTaskWindow : Window
 {
-    public event EventHandler<string> AfterClosingEvent;
     public NewTaskWindow()
     {
         InitializeComponent();
 
         DataContext = new TaskCreationViewModel();
-        this.Closing += OnClosed;
+        Closing += OnClosed;
     }
+
+    public event EventHandler<string> AfterClosingEvent;
 
     private void OnClosed(object? sender, EventArgs e)
     {
-        this.Owner.DataContext = DataContext;
+        Owner.DataContext = DataContext;
     }
 }

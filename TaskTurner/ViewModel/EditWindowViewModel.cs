@@ -1,46 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Input;
 using TaskTurner.DataServices;
 using TaskTurner.Models;
-using Task = TaskTurner.Models.Task;
-using TaskTurner.ViewModel;
-
 
 namespace TaskTurner.ViewModel;
 
-public class EditWindowViewModel: INotifyPropertyChanged
+public class EditWindowViewModel : INotifyPropertyChanged
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public DateTime DueDate { get; set; }
-    public DateTime StartDate { get; set; }
-    public TaskImportance TaskImportance { get; set; }
-    public ObservableCollection<Subtask> TaskCheckList { get; set; }
-    
-    public Subtask SelectedSubtask { get; set; }
+    private readonly TaskDataService taskDataService;
 
-    private TaskDataService taskDataService;
-    
-    public string Subtask { get; set; }
-
-    public ObservableCollection<TaskImportance> Importances { get; set; }
-    
-    public ObservableCollection<TaskImportance> InitializeTaskImportance()
-    {
-        return new ObservableCollection<TaskImportance>(Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>());
-    }
-
-    public ICommand IEditTask => new RelayCommand(EditTask);
-    
-    public ICommand IAddNewSubtask => new RelayCommand(AddNewSubtask);
-
-    public ICommand IDeleteSubtask => new RelayCommand(DeleteSubtask);
-    
-    public Action CloseAction { get; set; }
     public EditWindowViewModel()
     {
         taskDataService = new TaskDataService();
@@ -48,11 +17,39 @@ public class EditWindowViewModel: INotifyPropertyChanged
         Importances = InitializeTaskImportance();
     }
 
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public DateTime DueDate { get; set; }
+    public DateTime StartDate { get; set; }
+    public TaskImportance TaskImportance { get; set; }
+    public ObservableCollection<Subtask> TaskCheckList { get; set; }
+
+    public Subtask SelectedSubtask { get; set; }
+
+    public string Subtask { get; set; }
+
+    public ObservableCollection<TaskImportance> Importances { get; set; }
+
+    public ICommand IEditTask => new RelayCommand(EditTask);
+
+    public ICommand IAddNewSubtask => new RelayCommand(AddNewSubtask);
+
+    public ICommand IDeleteSubtask => new RelayCommand(DeleteSubtask);
+
+    public Action CloseAction { get; set; }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public ObservableCollection<TaskImportance> InitializeTaskImportance()
+    {
+        return new ObservableCollection<TaskImportance>(Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>());
+    }
+
     private void EditTask()
     {
-        List<Task> tasks = taskDataService.LoadTasks();
+        var tasks = taskDataService.LoadTasks();
         foreach (var task in tasks)
-        {
             if (task.Id == Id)
             {
                 task.Title = Title;
@@ -62,18 +59,17 @@ public class EditWindowViewModel: INotifyPropertyChanged
                 taskDataService.UpdateTask(task);
                 break;
             }
-        }
-        
+
         taskDataService.LoadTasks();
         CloseAction();
     }
-    
+
     public void AddNewSubtask()
     {
         if (Subtask == null) return;
         TaskCheckList.Add(new Subtask(Subtask));
         Subtask = null;
-        
+
         OnPropertyChanged(nameof(Subtask));
     }
 
@@ -82,8 +78,6 @@ public class EditWindowViewModel: INotifyPropertyChanged
         TaskCheckList.Remove(SelectedSubtask);
         SelectedSubtask = null;
     }
-    
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string propertyName)
     {

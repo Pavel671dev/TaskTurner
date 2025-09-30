@@ -5,7 +5,7 @@
         <Setter Property="FontFamily" Value="20" />
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
-    
+
     <!--Round Button-->
     <Style x:Key="RoundAccentButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource AccentDark}" />
@@ -35,7 +35,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--Search Button-->
     <Style x:Key="SearchButton" TargetType="Button">
         <Setter Property="Cursor" Value="Hand" />
@@ -85,37 +85,37 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--Task Title-->
     <Style x:Key="Title" TargetType="TextBlock">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource DefaultText}"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource DefaultText}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
-    
+
     <!--Task in List-->
     <Style x:Key="TaskInList" TargetType="TextBlock">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource DefaultText}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource DefaultText}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
-    
+
     <!--Action Buttons Font-->
     <Style x:Key="ActionButtons" TargetType="TextBlock">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
-    
+
     <!--Complete Button-->
     <Style x:Key="TaskViewCompleteButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource ButtonComplete}"/>
-        <Setter Property="Foreground" Value="{StaticResource OnAccent}"/>
-        <Setter Property="Padding" Value="20 5"/>
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="{StaticResource ButtonComplete}" />
+        <Setter Property="Foreground" Value="{StaticResource OnAccent}" />
+        <Setter Property="Padding" Value="20 5" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -123,27 +123,27 @@
                             Padding="{TemplateBinding Padding}"
                             CornerRadius="3">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                                          VerticalAlignment="{TemplateBinding VerticalAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ButtonCompleteOver}"/>
+                            <Setter Property="Background" Value="{StaticResource ButtonCompleteOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ButtonCompleteClick}"/>
+                            <Setter Property="Background" Value="{StaticResource ButtonCompleteClick}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--Edit Button-->
     <Style x:Key="TaskViewEditButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource ButtonEdit}"/>
-        <Setter Property="Foreground" Value="{StaticResource OnAccent}"/>
-        <Setter Property="Padding" Value="20 5"/>
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="{StaticResource ButtonEdit}" />
+        <Setter Property="Foreground" Value="{StaticResource OnAccent}" />
+        <Setter Property="Padding" Value="20 5" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -151,27 +151,27 @@
                             Padding="{TemplateBinding Padding}"
                             CornerRadius="3">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                                          VerticalAlignment="{TemplateBinding VerticalAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ButtonEditOver}"/>
+                            <Setter Property="Background" Value="{StaticResource ButtonEditOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ButtonEditClick}"/>
+                            <Setter Property="Background" Value="{StaticResource ButtonEditClick}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--Delete Button-->
     <Style x:Key="TaskViewDeleteButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource ButtonDelete}"/>
-        <Setter Property="Foreground" Value="{StaticResource OnAccent}"/>
-        <Setter Property="Padding" Value="20 5"/>
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="{StaticResource ButtonDelete}" />
+        <Setter Property="Foreground" Value="{StaticResource OnAccent}" />
+        <Setter Property="Padding" Value="20 5" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -179,28 +179,28 @@
                             Padding="{TemplateBinding Padding}"
                             CornerRadius="3">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                                          VerticalAlignment="{TemplateBinding VerticalAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ButtonDeleteOver}"/>
+                            <Setter Property="Background" Value="{StaticResource ButtonDeleteOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ButtonDeleteClick}"/>
+                            <Setter Property="Background" Value="{StaticResource ButtonDeleteClick}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--Navigation button-->
     <Style x:Key="TaskManagerNavigationButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource NavDefault}"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Width" Value="40"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Margin" Value="0 0 0 20"/>
+        <Setter Property="Background" Value="{StaticResource NavDefault}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Margin" Value="0 0 0 20" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -208,59 +208,59 @@
                             Padding="{TemplateBinding Padding}"
                             CornerRadius="3">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                                          VerticalAlignment="{TemplateBinding VerticalAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource NavOver}"/>
+                            <Setter Property="Background" Value="{StaticResource NavOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource NavClick}"/>
+                            <Setter Property="Background" Value="{StaticResource NavClick}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!-- New Subtask button-->
     <Style x:Key="SubtaskAddingButton" TargetType="Button">
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Width" Value="30"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="LightGray"/>
-        <Setter Property="Background" Value="{StaticResource SubtaskAdd}"/>
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="Background" Value="{StaticResource SubtaskAdd}" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                                          VerticalAlignment="{TemplateBinding VerticalAlignment}" />
                     </Border>
-                        
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource SubtaskAddOver}"/>
+                            <Setter Property="Background" Value="{StaticResource SubtaskAddOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource SubtaskAddClick}"/>
+                            <Setter Property="Background" Value="{StaticResource SubtaskAddClick}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--New Task Window Text-->
     <Style x:Key="NewTaskWindowText" TargetType="TextBlock">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontWeight" Value="Regular" />
     </Style>
-    
+
     <!--New Task Window Title-->
     <Style x:Key="NewTaskWindowTextbox" TargetType="TextBox">
         <Setter Property="Background" Value="White" />
@@ -287,7 +287,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--New Task Window Description-->
     <Style x:Key="NewTaskWindowDescription" TargetType="TextBox">
         <Setter Property="Background" Value="White" />
@@ -314,13 +314,13 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--New Task Add Button-->
     <Style x:Key="NewTaskAddButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource ButtonComplete}"/>
-        <Setter Property="Foreground" Value="{StaticResource OnAccent}"/>
-        <Setter Property="Padding" Value="20 5"/>
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="{StaticResource ButtonComplete}" />
+        <Setter Property="Foreground" Value="{StaticResource OnAccent}" />
+        <Setter Property="Padding" Value="20 5" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -328,14 +328,14 @@
                             Padding="{TemplateBinding Padding}"
                             CornerRadius="3">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                                          VerticalAlignment="{TemplateBinding VerticalAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ButtonCompleteOver}"/>
+                            <Setter Property="Background" Value="{StaticResource ButtonCompleteOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ButtonCompleteClick}"/>
+                            <Setter Property="Background" Value="{StaticResource ButtonCompleteClick}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

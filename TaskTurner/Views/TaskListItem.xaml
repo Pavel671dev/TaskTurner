@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:TaskTurner.Views"
              mc:Ignorable="d"
              d:DesignHeight="145" d:DesignWidth="435">
     <Grid>
@@ -12,13 +11,13 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        
+
         <TextBlock Text="Title"
                    Style="{StaticResource Title}"
                    Margin="20 0 "
                    VerticalAlignment="Center"
-                   Foreground="{StaticResource TaskListDescriptionTitle}"/>
-        
+                   Foreground="{StaticResource TaskListDescriptionTitle}" />
+
         <!--Importance Badge-->
         <Border CornerRadius="3"
                 Background="{StaticResource PlaceholderBorder}"
@@ -29,20 +28,20 @@
             <TextBlock Text="Importance"
                        Foreground="{StaticResource PlaceholderBorderText}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Center"></TextBlock>
+                       HorizontalAlignment="Center" />
         </Border>
         <!--Description-->
         <TextBlock Text="Placeholder text"
                    TextWrapping="Wrap"
                    Grid.Row="1"
                    Margin="20 5 0 0"
-                   Foreground="{StaticResource TaskListDescriptionText}"/>
-        
+                   Foreground="{StaticResource TaskListDescriptionText}" />
+
         <!--Due Date-->
         <TextBlock Text="Due: 23/12/2025"
                    Grid.Row="2"
                    VerticalAlignment="Center"
                    Margin="20 0"
-                   Foreground="{StaticResource TaskListDescriptionText}"/>
+                   Foreground="{StaticResource TaskListDescriptionText}" />
     </Grid>
 </UserControl>

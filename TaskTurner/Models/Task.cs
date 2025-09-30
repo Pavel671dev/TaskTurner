@@ -15,7 +15,7 @@ public class Task
     public TaskState TaskState { get; set; }
     public TaskCategory TaskCategory { get; set; }
     public TaskImportance TaskImportance { get; set; }
-    
+
     public ObservableCollection<Subtask> TaskCheckList { get; set; }
 }
 

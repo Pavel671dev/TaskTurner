@@ -3,66 +3,63 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:TaskTurner.Views"
         xmlns:viewModel="clr-namespace:TaskTurner.ViewModel"
-        xmlns:global="clr-namespace:"
         mc:Ignorable="d"
         Title="NewTaskWindow" Height="480" Width="340"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <viewModel:EditWindowViewModel/>
+        <viewModel:EditWindowViewModel />
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="120"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        
+
         <!--Title-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="120" />
             </Grid.ColumnDefinitions>
-            
-            <TextBox x:Name="TitleBox" 
+
+            <TextBox x:Name="TitleBox"
                      Style="{StaticResource NewTaskWindowTextbox}"
-                     Margin="10 10 0 0 " 
-                     Text="{Binding Title, UpdateSourceTrigger=PropertyChanged }"/>
-            
+                     Margin="10 10 0 0 "
+                     Text="{Binding Title, UpdateSourceTrigger=PropertyChanged }" />
+
             <Label IsHitTestVisible="False"
                    Content="Title..."
                    VerticalAlignment="Center"
                    Margin="15 10 0 0"
                    Foreground="{StaticResource Borders}"
-                   Visibility="{Binding Text.IsEmpty, ElementName=TitleBox, Converter={StaticResource BooleanToVisibilityConverter}}"
-                   />
-            <TextBlock x:Name = "TaskId"
-                        Grid.Column="1" 
-                       Text = "{Binding Id, Mode=TwoWay}"
-                       Style = "{StaticResource Title}"
-                       Margin = "50 10 0 0"/>
+                   Visibility="{Binding Text.IsEmpty, ElementName=TitleBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBlock x:Name="TaskId"
+                       Grid.Column="1"
+                       Text="{Binding Id, Mode=TwoWay}"
+                       Style="{StaticResource Title}"
+                       Margin="50 10 0 0" />
             <TextBlock Grid.Column="1"
-                       Style = "{StaticResource Title}"
-                       Text = "Id:"
-                       Margin="20 10 0 0"/>
+                       Style="{StaticResource Title}"
+                       Text="Id:"
+                       Margin="20 10 0 0" />
         </Grid>
-        
+
         <!--Description-->
         <ScrollViewer Grid.Row="1"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled">
-            <TextBox Grid.Row="1" x:Name="Description"
+            <TextBox x:Name="Description"
                      Style="{StaticResource NewTaskWindowDescription}"
                      TextWrapping="Wrap"
                      Margin="10 10 10 0"
                      VerticalContentAlignment="Top"
                      HorizontalContentAlignment="Left"
-                     Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
         </ScrollViewer>
         <Label Grid.Row="1"
                IsHitTestVisible="False"
@@ -73,36 +70,36 @@
                FontWeight="Normal"
                Foreground="{StaticResource Borders}"
                Margin="10 10 10 0"
-               Visibility="{Binding Text.IsEmpty, ElementName=Description, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        
+               Visibility="{Binding Text.IsEmpty, ElementName=Description, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
         <!--Subtask adding-->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240"/>
-                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
-            
-            <TextBox  
-                     Style="{StaticResource NewTaskWindowTextbox}"
-                     Margin="10 10 20 0 "
-                     Text = "{Binding Subtask, UpdateSourceTrigger=PropertyChanged}"/>
-            
+
+            <TextBox
+                Style="{StaticResource NewTaskWindowTextbox}"
+                Margin="10 10 20 0 "
+                Text="{Binding Subtask, UpdateSourceTrigger=PropertyChanged}" />
+
             <Button Grid.Column="1"
-                        Margin = "0 10 45 0"
-                        Style="{StaticResource SubtaskAddingButton}"
-                        Command ="{Binding IAddNewSubtask}">
-                        <Viewbox Width="20" Height="20"
-                                 Margin="0 1 4 0">
-                            <Path Data="{StaticResource NewTaskIcon}" Fill="{StaticResource OnAccent}" />
-                        </Viewbox>
+                    Margin="0 10 45 0"
+                    Style="{StaticResource SubtaskAddingButton}"
+                    Command="{Binding IAddNewSubtask}">
+                <Viewbox Width="20" Height="20"
+                         Margin="0 1 4 0">
+                    <Path Data="{StaticResource NewTaskIcon}" Fill="{StaticResource OnAccent}" />
+                </Viewbox>
             </Button>
             <Button Grid.Column="1"
-                    Margin = "30 10 0 0"
+                    Margin="30 10 0 0"
                     Width="30"
-                    Height = "30"
+                    Height="30"
                     Style="{StaticResource TaskViewDeleteButton}"
-                    Command ="{Binding IDeleteSubtask}">
-                    <TextBlock Text="Del"/>
+                    Command="{Binding IDeleteSubtask}">
+                <TextBlock Text="Del" />
             </Button>
         </Grid>
 
@@ -110,52 +107,52 @@
                 BorderThickness="1"
                 BorderBrush="LightGray"
                 Margin="10 10 10 10">
-                <ListView x:Name="SubtaskView"
-                    ItemsSource="{Binding TaskCheckList, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedSubtask}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="DarkGray"
-                                    BorderThickness="1">
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                                                  HorizontalScrollBarVisibility="Disabled">
-                                        <TextBox Text = "{Binding Description}"
-                                                   FontSize="14"
-                                                   Foreground="LightGray"
-                                                   TextWrapping="Wrap"/>
-                                    </ScrollViewer>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+            <ListView x:Name="SubtaskView"
+                      ItemsSource="{Binding TaskCheckList, Mode=TwoWay}"
+                      SelectedItem="{Binding SelectedSubtask}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="DarkGray"
+                                BorderThickness="1">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled">
+                                <TextBox Text="{Binding Description}"
+                                         FontSize="14"
+                                         Foreground="LightGray"
+                                         TextWrapping="Wrap" />
+                            </ScrollViewer>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Border>
-        
+
         <StackPanel Grid.Row="4">
             <StackPanel Orientation="Horizontal"
                         Margin="0 0 0 0"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left">
                 <TextBlock Text="Due: " Margin="5 0 0 0"
-                           VerticalAlignment="Center"/>
+                           VerticalAlignment="Center" />
                 <DatePicker x:Name="Date"
-                    Margin="5 0 0 0" SelectedDate="{Binding DueDate, UpdateSourceTrigger=PropertyChanged}"/>
+                            Margin="5 0 0 0" SelectedDate="{Binding DueDate, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </StackPanel>
-        
+
         <Button Grid.Row="5"
                 Style="{StaticResource NewTaskAddButton}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
                 Width="70"
                 Height="20"
-                Margin = "0 0 10 10"
+                Margin="0 0 10 10"
                 Command="{Binding IEditTask}">
-                <TextBlock  Margin = "5 0 0 0"
-                        Height="20"
-                        FontSize="9"
-                        Width = "50"
-                        Text="Edit"
-                        VerticalAlignment="Top"/>
+            <TextBlock Margin="5 0 0 0"
+                       Height="20"
+                       FontSize="9"
+                       Width="50"
+                       Text="Edit"
+                       VerticalAlignment="Top" />
         </Button>
     </Grid>
 </Window>
