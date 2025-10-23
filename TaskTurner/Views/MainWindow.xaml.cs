@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using TaskTurner.DataServices;
 using TaskTurner.ViewModel;
 using Task = TaskTurner.Models.Task;
 
@@ -17,24 +16,27 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel();
-        taskDataService = new TaskDataService();
         TaskListView.Items.Filter = FilterByName;
     }
 
-    private Task selectedTask { get; set; }
-    private TaskDataService taskDataService { get; }
+    private Task SelectedTask { get; set; }
 
-    private MainWindowViewModel viewModel { get; }
+    private MainWindowViewModel ViewModel { get; }
 
     private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (TaskSearchBox.Text != null) TaskListView.Items.Filter = FilterByName;
-        ;
-        selectedTask = (Task)TaskListView.SelectedItem;
-        if (selectedTask is null) return;
-        TaskTitle.Text = selectedTask.Title;
-        TaskDescription.Text = selectedTask.Description;
-        TaskDueDate.Text = "Due: " + selectedTask.DueDate.ToShortDateString();
+        if (TaskSearchBox.Text != null)
+        {
+            TaskListView.Items.Filter = FilterByName;
+        }
+        SelectedTask = (Task)TaskListView.SelectedItem;
+        if (SelectedTask is null)
+        {
+            return;
+        }
+        TaskTitle.Text = SelectedTask.Title;
+        TaskDescription.Text = SelectedTask.Description;
+        TaskDueDate.Text = "Due: " + SelectedTask.DueDate.ToShortDateString();
         TaskCheckListView.ItemsSource = TakeSubtasks();
 
         TaskImportance.Background = SetImportanceColor();
@@ -42,15 +44,18 @@ public partial class MainWindow : Window
 
     private ObservableCollection<string> TakeSubtasks()
     {
-        var subtasks = selectedTask.TaskCheckList;
+        var subtasks = SelectedTask.TaskCheckList;
         var subtasksText = new ObservableCollection<string>();
-        foreach (var subtask in subtasks) subtasksText.Add(subtask.Description);
+        foreach (var subtask in subtasks)
+        {
+            subtasksText.Add(subtask.Description);
+        }
         return subtasksText;
     }
 
     private SolidColorBrush SetImportanceColor()
     {
-        switch (selectedTask.TaskImportance)
+        switch (SelectedTask.TaskImportance)
         {
             case Models.TaskImportance.Low:
                 return new SolidColorBrush(Colors.ForestGreen);
@@ -71,6 +76,9 @@ public partial class MainWindow : Window
 
     private void TaskSearchBox_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-        if (TaskSearchBox.Text != null) TaskListView.Items.Filter = FilterByName;
+        if (TaskSearchBox.Text != null)
+        {
+            TaskListView.Items.Filter = FilterByName;
+        }
     }
 }

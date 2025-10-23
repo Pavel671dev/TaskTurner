@@ -15,7 +15,8 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     public MainWindowViewModel()
     {
-        taskDataService = new TaskDataService();
+        taskDataService = new TaskDataService(Environment
+            .GetFolderPath(Environment.SpecialFolder.ApplicationData));
         LoadTasks();
     }
 
@@ -35,25 +36,28 @@ public class MainWindowViewModel : INotifyPropertyChanged
         }
     }
 
-    public ICommand IOpenNewWindowCommand => new RelayCommand(OpenTaskAddWindow);
+    public ICommand OpenNewWindowCommand => new RelayCommand(OpenTaskAddWindow);
 
-    public ICommand IDeleteTaskCommand => new RelayCommand(DeleteTask);
+    public ICommand DeleteTaskCommand => new RelayCommand(DeleteTask);
 
-    public ICommand ICompleteTaskCommand => new RelayCommand(CompleteTask);
+    public ICommand CompleteTaskCommand => new RelayCommand(CompleteTask);
 
-    public ICommand IEditTaskCommand => new RelayCommand(EditTask);
+    public ICommand EditTaskCommand => new RelayCommand(EditTask);
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public void LoadTasks()
-    {
-        var TaskList = taskDataService.LoadTasks();
-        Tasks = new ObservableCollection<Task>(TaskList);
-    }
 
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+    
     private void DeleteTask()
     {
-        if (!IsClickable()) return;
+        if (!IsClickable())
+        {
+            return;
+        }
         var result = MessageBox.Show("Are you sure want to delete this task?",
             "Warning", MessageBoxButton.YesNo);
         if (result == MessageBoxResult.Yes)
@@ -63,15 +67,24 @@ public class MainWindowViewModel : INotifyPropertyChanged
             SelectedTask = null;
         }
     }
-
+    
     private void CompleteTask()
     {
-        if (!IsClickable()) return;
+        if (!IsClickable())
+        {
+            return;
+        }
         var completedTask = SelectedTask;
         completedTask.IsCompleted = true;
         taskDataService.UpdateTask(completedTask);
         LoadTasks();
         SelectedTask = null;
+    }
+    
+    private void LoadTasks()
+    {
+        var TaskList = taskDataService.LoadTasks();
+        Tasks = new ObservableCollection<Task>(TaskList);
     }
 
     private void OpenTaskAddWindow()
@@ -83,7 +96,10 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     private void EditTask()
     {
-        if (!IsClickable()) return;
+        if (!IsClickable())
+        {
+            return;
+        }
         var editWindow = new EditWindow(SelectedTask);
         editWindow.EditedTask = SelectedTask;
         editWindow.Owner = Application.Current.MainWindow;
@@ -93,10 +109,5 @@ public class MainWindowViewModel : INotifyPropertyChanged
     private bool IsClickable()
     {
         return SelectedTask != null;
-    }
-
-    protected virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -16,7 +16,8 @@ public class TaskCreationViewModel : INotifyPropertyChanged
 
     public TaskCreationViewModel()
     {
-        taskDataService = new TaskDataService();
+        taskDataService = new TaskDataService(Environment
+            .GetFolderPath(Environment.SpecialFolder.ApplicationData));
         TaskCheckList = new ObservableCollection<Subtask>();
         DueDate = DateTime.Now;
         // Resource for Combobox
@@ -33,13 +34,13 @@ public class TaskCreationViewModel : INotifyPropertyChanged
 
     public string SubTask { get; set; }
 
-    public ObservableCollection<TaskImportance> Importances { get; set; }
+    public ObservableCollection<TaskImportance> Importances { get; }
 
 
-    public ObservableCollection<Subtask> TaskCheckList { get; set; }
+    public ObservableCollection<Subtask> TaskCheckList { get; }
 
-    public ICommand IAddNewTask => new RelayCommand(AddNewTask);
-    public ICommand IAddNewSubtask => new RelayCommand(AddNewSubtask);
+    public ICommand AddNewTaskCommand => new RelayCommand(AddNewTask);
+    public ICommand AddNewSubtaskCommand => new RelayCommand(AddNewSubtask);
 
     public ObservableCollection<Task> Tasks
     {
@@ -53,13 +54,18 @@ public class TaskCreationViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler PropertyChanged;
 
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
     private void LoadTasks()
     {
         var TaskList = taskDataService.LoadTasks();
         Tasks = new ObservableCollection<Task>(TaskList);
     }
 
-    public void AddNewTask()
+    private void AddNewTask()
     {
         if (!IsAddableTitle(Title))
         {
@@ -71,7 +77,7 @@ public class TaskCreationViewModel : INotifyPropertyChanged
         {
             Title = Title,
             Description = Description,
-            Id = taskDataService.GenerateNewTaskID(),
+            Id = taskDataService.GenerateNewTaskId(),
             DueDate = DueDate,
             IsCompleted = false,
             StartDate = DateTime.Now,
@@ -91,9 +97,12 @@ public class TaskCreationViewModel : INotifyPropertyChanged
         return char.IsLetter(title[0]);
     }
 
-    public void AddNewSubtask()
+    private void AddNewSubtask()
     {
-        if (SubTask == null) return;
+        if (SubTask == null)
+        {
+            return;
+        }
         TaskCheckList.Add(new Subtask(SubTask));
         SubTask = null;
 
@@ -118,13 +127,8 @@ public class TaskCreationViewModel : INotifyPropertyChanged
         OnPropertyChanged(nameof(Importances));
     }
 
-    public ObservableCollection<TaskImportance> InitializeTaskImportance()
+    private ObservableCollection<TaskImportance> InitializeTaskImportance()
     {
         return new ObservableCollection<TaskImportance>(Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>());
-    }
-
-    protected virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

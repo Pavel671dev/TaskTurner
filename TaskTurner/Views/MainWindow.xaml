@@ -95,7 +95,7 @@
                     Height="40"
                     Width="40"
                     Margin="0 0 20 0"
-                    Command="{Binding IOpenNewWindowCommand}">
+                    Command="{Binding OpenNewWindowCommand}">
                 <Viewbox Width="20" Height="20">
                     <Path Data="{StaticResource NewTaskIcon}" Fill="{StaticResource OnAccent}" />
                 </Viewbox>
@@ -226,7 +226,7 @@
 
             <!--Action Buttons-->
             <Grid Grid.Row="2">
-                <Button Command="{Binding IDeleteTaskCommand}"
+                <Button Command="{Binding DeleteTaskCommand}"
                         Style="{StaticResource TaskViewDeleteButton}"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -242,7 +242,7 @@
                         VerticalAlignment="Center"
                         Width="120"
                         Height="30"
-                        Command="{Binding IEditTaskCommand}">
+                        Command="{Binding EditTaskCommand}">
                     <TextBlock Text="Edit"
                                Style="{StaticResource ActionButtons}" />
                 </Button>
@@ -251,7 +251,7 @@
                         Height="30"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
-                        Command="{Binding ICompleteTaskCommand}"
+                        Command="{Binding CompleteTaskCommand}"
                         Margin="0 0 20 0">
                     <TextBlock Text="Complete"
                                Style="{StaticResource ActionButtons}"

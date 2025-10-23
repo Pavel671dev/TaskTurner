@@ -12,7 +12,8 @@ public class EditWindowViewModel : INotifyPropertyChanged
 
     public EditWindowViewModel()
     {
-        taskDataService = new TaskDataService();
+        taskDataService = new TaskDataService(Environment
+            .GetFolderPath(Environment.SpecialFolder.ApplicationData));
         // Resource for Combobox
         Importances = InitializeTaskImportance();
     }
@@ -31,42 +32,46 @@ public class EditWindowViewModel : INotifyPropertyChanged
 
     public ObservableCollection<TaskImportance> Importances { get; set; }
 
-    public ICommand IEditTask => new RelayCommand(EditTask);
+    public ICommand EditTaskCommand => new RelayCommand(EditTask);
 
-    public ICommand IAddNewSubtask => new RelayCommand(AddNewSubtask);
+    public ICommand AddNewSubtaskCommand => new RelayCommand(AddNewSubtask);
 
-    public ICommand IDeleteSubtask => new RelayCommand(DeleteSubtask);
+    public ICommand DeleteSubtaskCommand => new RelayCommand(DeleteSubtask);
 
     public Action CloseAction { get; set; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public ObservableCollection<TaskImportance> InitializeTaskImportance()
+    private ObservableCollection<TaskImportance> InitializeTaskImportance()
     {
-        return new ObservableCollection<TaskImportance>(Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>());
+        return new ObservableCollection<TaskImportance>(Enum
+            .GetValues(typeof(TaskImportance))
+            .Cast<TaskImportance>());
     }
 
     private void EditTask()
     {
         var tasks = taskDataService.LoadTasks();
-        foreach (var task in tasks)
-            if (task.Id == Id)
-            {
-                task.Title = Title;
-                task.Description = Description;
-                task.TaskCheckList = TaskCheckList;
-                task.DueDate = DueDate;
-                taskDataService.UpdateTask(task);
-                break;
-            }
+        foreach (var task in tasks.Where(task => task.Id == Id))
+        {
+            task.Title = Title;
+            task.Description = Description;
+            task.TaskCheckList = TaskCheckList;
+            task.DueDate = DueDate;
+            taskDataService.UpdateTask(task);
+            break;
+        }
 
         taskDataService.LoadTasks();
         CloseAction();
     }
 
-    public void AddNewSubtask()
+    private void AddNewSubtask()
     {
-        if (Subtask == null) return;
+        if (Subtask == null)
+        {
+            return;
+        }
         TaskCheckList.Add(new Subtask(Subtask));
         Subtask = null;
 

@@ -18,28 +18,3 @@ public class Task
 
     public ObservableCollection<Subtask> TaskCheckList { get; set; }
 }
-
-public enum TaskState
-{
-    InProgress,
-    Complete,
-    NotStarted,
-    Late,
-    Archived,
-    Deleted
-}
-
-public enum TaskCategory
-{
-    Work,
-    Personal,
-    Home,
-    Finance
-}
-
-public enum TaskImportance
-{
-    Low,
-    Medium,
-    High
-}
